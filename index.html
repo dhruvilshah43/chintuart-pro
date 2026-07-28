@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chintuart ? Ahmedabad's premier signage and outdoor advertising company. ACP Elevation, LED Neon, Pylon, Flex, Channel Letters and more. Call +91 9924823684">
+  <meta property="og:title" content="Chintuart ? Grow Your Business With Us">
+  <meta property="og:description" content="Premium quality signages and branding solutions in Ahmedabad, Gujarat.">
+  <title>Chintuart ? Premium Signages & Outdoor Advertising, Ahmedabad</title>
+  <link rel="icon" href="assets/images/Chintu-Art_PDF_New-Logo-1-removebg-preview.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* -- Hero specific -- */
+    .hero-word-1 { animation-delay: 0.05s; }
+    .hero-word-2 { animation-delay: 0.15s; }
+    .hero-word-3 { animation-delay: 0.25s; }
+    .hero-word-4 { animation-delay: 0.35s; }
+    .hero-word-5 { animation-delay: 0.45s; }
+    .hero-word-6 { animation-delay: 0.55s; }
+
+    /* -- Marquee services -- */
+    .marquee-services {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0;
+      background: linear-gradient(90deg, #c0392b 0%, var(--primary) 40%, var(--primary) 60%, #c0392b 100%);
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      box-shadow: 0 4px 24px rgba(230,56,41,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: ticker 55s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+      padding: 14px 0;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 28px;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .marquee-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 1px;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+      opacity: 0.85;
+    }
+
+    /* -- Portfolio masonry -- */
+    .home-gallery {
+      columns: 4;
+      column-gap: 14px;
+    }
+    .home-gallery .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 14px;
+    }
+    .home-gallery .gallery-item:nth-child(3n+1) { aspect-ratio: 4/5; }
+    .home-gallery .gallery-item:nth-child(3n+2) { aspect-ratio: 4/3; }
+    .home-gallery .gallery-item:nth-child(3n+3) { aspect-ratio: 1; }
+    @media(max-width:1024px){ .home-gallery { columns: 3; } }
+    @media(max-width:768px) { .home-gallery { columns: 2; } }
+    @media(max-width:480px) { .home-gallery { columns: 1; } }
+
+    /* -- Services cards row -- */
+    .services-showcase {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    @media(max-width:1024px){ .services-showcase { grid-template-columns: repeat(3,1fr); } }
+    @media(max-width:768px) { .services-showcase { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:480px) { .services-showcase { grid-template-columns: 1fr; } }
+
+    /* -- Testimonial -- */
+    .testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      transition: var(--transition);
+    }
+    .testimonial-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(230,56,41,0.25);
+      transform: translateY(-4px);
+    }
+    .testimonial-stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .testimonial-text { font-size: 0.95rem; color: rgba(255,255,255,0.72); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: var(--primary);
+      font-family: var(--font);
+    }
+    .testimonial-name { font-size: 0.92rem; font-weight: 600; color: var(--white); }
+    .testimonial-role { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+
+    /* -- Process -- */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      position: relative;
+    }
+    .process-grid::before {
+      content:'';
+      position:absolute;
+      top: 40px; left: 12.5%; right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      opacity: 0.3;
+    }
+    .process-card { text-align: center; }
+    .process-number {
+      width: 68px; height: 68px;
+      background: var(--primary-light);
+      border: 2px solid rgba(230,56,41,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font); font-size: 1.4rem; font-weight: 800;
+      color: var(--primary);
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+      transition: var(--transition);
+    }
+    .process-card:hover .process-number {
+      background: var(--primary); color: var(--white); border-color: var(--primary);
+      transform: scale(1.1);
+    }
+    .process-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--dark); }
+    .process-desc  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+    @media(max-width:768px){
+      .process-grid { grid-template-columns: repeat(2,1fr); }
+      .process-grid::before { display:none; }
+    }
+    @media(max-width:480px){ .process-grid { grid-template-columns: 1fr; } }
+
+    /* -- Brands scroll on hover pause -- */
+    .ticker-wrapper:hover .ticker-track { animation-play-state: paused; }
+
+    /* -- Hero Slideshow -- */
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+    .hero-slide.active { opacity: 1; z-index: 1; }
+    .hero-slide-dots {
+      position: absolute;
+      bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 7px;
+      z-index: 3;
+    }
+    .hero-slide-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: all 0.35s ease;
+    }
+    .hero-slide-dot.active {
+      background: #fff;
+      width: 22px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header + Footer injected by JS -->
+<div id="header-placeholder"></div>
+
+<!-- ------------------------------- HERO ------------------------------------ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" style="background-image:url('assets/images/banner-bg.png')"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Ahmedabad's #1 Signage Studio
+        </div>
+
+        <h1 class="hero-title">
+          <span class="line">
+            <span class="word hero-word-1">Grow</span>&nbsp;
+            <span class="word hero-word-2">Your</span>
+          </span>
+          <span class="line">
+            <span class="word hero-word-3 accent">Business</span>
+          </span>
+          <span class="line">
+            <span class="word hero-word-4">With</span>&nbsp;
+            <span class="word hero-word-5 accent">Us</span>
+          </span>
+        </h1>
+
+        <div style="display:flex;align-items:center;gap:14px;margin:18px 0 6px;">
+          <span style="display:block;width:36px;height:2px;background:var(--gold);border-radius:2px;flex-shrink:0;"></span>
+          <p style="font-family:var(--font);font-size:1.25rem;font-weight:600;color:var(--gold);letter-spacing:0.04em;margin:0;font-style:italic;">Let's Grow Up Together</p>
+        </div>
+
+        <p class="hero-subtitle">
+          Specialist in LED Signage, ACP Elevation, Terrace Signage Work, Signage Projects for Builders and Hospital,
+          Pylon, Branding, LED Display Screen, Corporate Signage, SS / Acrylic Letters,
+          Varieties of Name Plates &amp; every type of Signage.
+        </p>
+
+        <div class="btn-group">
+          <a href="services/index.html" class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+            Explore Services
+          </a>
+          <a href="https://wa.me/919924823684?text=Hello%20Chintuart%2C%20I%20need%20a%20signage%20quote." class="btn btn-outline btn-lg" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Get a Free Quote
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span data-count="20">0</span><span class="plus">+</span></div>
+            <div class="hero-stat-label">Years Experience</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span data-count="2000">0</span><span class="plus">+</span></div>
+            <div class="hero-stat-label">Projects Done</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span data-count="1500">0</span><span class="plus">+</span></div>
+            <div class="hero-stat-label">Happy Clients</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Image -->
+      <div class="hero-visual">
+        <div class="hero-img-wrapper">
+          <div class="hero-img-main" id="heroSlider">
+            <img class="hero-slide active" src="assets/images/KS_Karnavati-Snacks_Chintu-Art_WYS.webp"   alt="Chintu Art Signage Work" loading="eager">
+            <img class="hero-slide" src="assets/images/Arista_Pylon_Chintu-Art.webp"                     alt="Pylon Signage" loading="lazy">
+            <img class="hero-slide" src="assets/images/LED-Neon_Chintu-Art.webp"                         alt="LED Neon Sign" loading="lazy">
+            <img class="hero-slide" src="assets/images/ACP-Elevation-A_Chintu-Art.webp"                  alt="ACP Elevation" loading="lazy">
+            <img class="hero-slide" src="assets/images/New-Mehfil_Chintu-Art.webp"                       alt="Restaurant Branding" loading="lazy">
+            <img class="hero-slide" src="assets/images/Emberlynn_LED-Backlite_Chintu-Art.webp"           alt="LED Backlite Signage" loading="lazy">
+            <img class="hero-slide" src="assets/images/Karnavati-Snacks_Chintu-Art.webp"                 alt="Outlet Branding" loading="lazy">
+            <button class="hero-slider-arrow hero-slider-prev" id="heroSliderPrev" aria-label="Previous slide">&#8249;</button>
+            <button class="hero-slider-arrow hero-slider-next" id="heroSliderNext" aria-label="Next slide">&#8250;</button>
+            <div class="hero-slide-dots" id="heroSliderDots"></div>
+          </div>
+          <div class="hero-img-badge">
+            <div class="hero-img-badge-icon">&#127942;</div>
+            <div class="hero-img-badge-text">
+              <strong>Award-Winning</strong>
+              Signage Quality
+            </div>
+          </div>
+          <div class="hero-img-badge-2">&#9733; 5-Star Rated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- --------------------------- SERVICE MARQUEE --------------------------- -->
+<div class="marquee-services">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item"><span class="marquee-dot"></span> LED Sign</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> ACP Works</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Terrace Sign</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Hoarding</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Builder Signage</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Hospital Signage</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Pylon</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Digital LED Screen</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Signage Projects</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Branding</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> SS / Acrylic Letters</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Glowsign & Every Type of Signage</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> Name Plates</div>
+  </div>
+</div>
+
+<!-- ------------------------------- STATS -------------------------------- -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-icon-ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="9" width="18" height="13" rx="1"/><path d="M3 9l9-7 9 7"/><path d="M9 22V12h6v10"/></svg></span>
+        <span class="stat-number"><span data-count="20">0</span><span class="stat-suffix">+</span></span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Years in Business</div>
+      </div>
+      <div class="stat-card reveal delay-100">
+        <span class="stat-icon-ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+        <span class="stat-number"><span data-count="2000">0</span><span class="stat-suffix">+</span></span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-card reveal delay-200">
+        <span class="stat-icon-ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
+        <span class="stat-number"><span data-count="1500">0</span><span class="stat-suffix">+</span></span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Satisfied Clients</div>
+      </div>
+      <div class="stat-card reveal delay-300">
+        <span class="stat-icon-ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+        <span class="stat-number"><span data-count="15">0</span><span class="stat-suffix">+</span></span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Service Categories</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------ ABOUT ---------------------------------- -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:60px;align-items:center;">
+      <!-- Image -->
+      <div class="about-img-group reveal-left">
+        <div class="about-img-main">
+          <img src="assets/images/KS_Karnavati-Snacks_Chintu-Art_Branding.webp" alt="Chintuart Work" loading="lazy">
+        </div>
+        <div class="about-img-secondary">
+          <img src="assets/images/Karnavati-Snacks_Chintu-Art.webp" alt="Signage Detail" loading="lazy">
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">20+</div>
+          <div class="about-badge-text">Years of Excellence</div>
+        </div>
+      </div>
+      <!-- Text -->
+      <div class="reveal-right">
+        <div class="eyebrow">About Chintuart</div>
+        <h2 class="section-title">Ahmedabad's Most Trusted Signage Experts</h2>
+        <p>
+          <strong>Chintu Art (Signage World)</strong> has been transforming and creating brands and spaces across Ahmedabad for over two decades.
+          We specialize in every kind of signage solution and outdoor advertising.
+        </p>
+        <p style="margin-top:14px;">
+          Driven by our passion for quality craftsmanship, innovation, and modern aesthetics, every project we deliver
+          is designed to last, attract attention, and communicate your brand story with impact.
+        </p>
+        <p style="margin-top:14px;">
+          Whether it's a single sign or a complete branding solution,
+          <strong>Chintu Art (Signage World)</strong> is committed to turning your vision into a lasting impression.
+        </p>
+        <div class="features-list" style="margin-top:28px;">
+          <div class="feature-item">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+            <div class="feature-text">
+              <h4>State-of-the-Art Manufacturing</h4>
+              <p>Advanced CNC, laser-cutting, and fabrication technology for precision output.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <div class="feature-text">
+              <h4>Customised for Every Brand</h4>
+              <p>Every sign is designed and built specifically for your brand identity and location.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <div class="feature-text">
+              <h4>On-Time Delivery &amp; Installation</h4>
+              <p>Professional installation crew with a track record of on-schedule delivery.</p>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group" style="margin-top:32px;">
+          <a href="about-us.html" class="btn btn-primary">Know More About Us</a>
+          <a href="contact-us.html" class="btn btn-outline-dark">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- -------------------------- SERVICES SECTION --------------------------- -->
+<section class="section section-gray" id="services">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2 class="section-title">Comprehensive Solutions Of<br>Chintu Art Signage</h2>
+      <p class="section-subtitle">From concept to installation ? we handle every type of signage need for your brand.</p>
+    </div>
+
+    <div class="services-showcase">
+
+      <a href="services/acp-elevation.html" class="service-card reveal delay-100">
+        <div class="service-card-img">
+          <img src="assets/images/ACP-Elevation-A_Chintu-Art.webp" alt="ACP Elevation" loading="lazy">
+          <div class="service-card-overlay"></div>
+          <span class="service-card-category">Exterior</span>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">ACP Elevation Signages</h3>
+          <p class="service-card-desc">Aluminum Composite Panel signages for stunning building exteriors and frontages.</p>
+          <span class="service-card-link">View Gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services/flex-backlite.html" class="service-card reveal delay-200">
+        <div class="service-card-img">
+          <img src="assets/images/Emberlynn_LED-Backlite_Chintu-Art.webp" alt="Flex Backlite" loading="lazy">
+          <div class="service-card-overlay"></div>
+          <span class="service-card-category">Backlite</span>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">Flex Backlite Signages</h3>
+          <p class="service-card-desc">Backlit flex panels that glow brilliantly day and night for maximum visibility.</p>
+          <span class="service-card-link">View Gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services/neon-signages.html" class="service-card reveal delay-300">
+        <div class="service-card-img">
+          <img src="assets/images/LED-Neon_Chintu-Art.webp" alt="LED Neon" loading="lazy">
+          <div class="service-card-overlay"></div>
+          <span class="service-card-category">Neon LED</span>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">LED Neon Signages</h3>
+          <p class="service-card-desc">Custom LED neon signs in any shape, word or design ? vibrant and energy-efficient.</p>
+          <span class="service-card-link">View Gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services/pylon.html" class="service-card reveal delay-100">
+        <div class="service-card-img">
+          <img src="assets/images/Arista_Pylon_Chintu-Art.webp" alt="Pylon" loading="lazy">
+          <div class="service-card-overlay"></div>
+          <span class="service-card-category">Pylon</span>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">Pylon Signages</h3>
+          <p class="service-card-desc">Tall, commanding pylon structures that make your brand unmissable from afar.</p>
+          <span class="service-card-link">View Gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services/ss-letters.html" class="service-card reveal delay-200">
+        <div class="service-card-img">
+          <img src="assets/images/SS-GOLD-SIGNAGES-359942051-zbw54-min.webp" alt="SS Letters" loading="lazy">
+          <div class="service-card-overlay"></div>
+          <span class="service-card-category">Letters</span>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">SS / Rose Gold / Golden Letters</h3>
+          <p class="service-card-desc">Premium stainless steel, rose gold and golden letters for a luxury brand presence.</p>
+          <span class="service-card-link">View Gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services/branding.html" class="service-card reveal delay-300">
+        <div class="service-card-img">
+          <img src="assets/images/Karnavati-Snacks_Chintu-Art.webp" alt="Branding" loading="lazy">
+          <div class="service-card-overlay"></div>
+          <span class="service-card-category">Branding</span>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">Outlet Branding</h3>
+          <p class="service-card-desc">End-to-end outlet and store branding that creates a cohesive, powerful brand experience.</p>
+          <span class="service-card-link">View Gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services/cnc-cutting.html" class="service-card reveal delay-100">
+        <div class="service-card-img">
+          <img src="assets/images/Kanan-Prep_ACP-CNC-Cutting_Chintu-Art.webp" alt="CNC Cutting" loading="lazy">
+          <div class="service-card-overlay"></div>
+          <span class="service-card-category">CNC / Laser</span>
+        </div>
+        <div class="service-card-body">
+          <h3 class="service-card-title">CNC / Laser Cutting</h3>
+          <p class="service-card-desc">Precision CNC and laser cutting for intricate designs in ACP, acrylic, MS and more.</p>
+          <span class="service-card-link">View Gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services/index.html" class="service-card reveal delay-200" style="background:linear-gradient(135deg,var(--dark),var(--navy));border:none;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:280px;text-align:center;padding:32px;">
+          <div style="font-size:3rem;margin-bottom:16px;">+</div>
+          <h3 style="color:var(--white);font-size:1.1rem;margin-bottom:8px;">8 More Services</h3>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;margin:0 0 20px;">Hoardings, Name Plates, Terrace Signs, Lollipop Signage &amp; more</p>
+          <span class="btn btn-primary btn-sm">View All Services</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------------------------- PROCESS ---------------------------------- -->
+<section class="section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow">How We Work</div>
+      <h2 class="section-title">Simple 4-Step Process</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card reveal delay-100">
+        <div class="process-number">01</div>
+        <h3 class="process-title">Consultation</h3>
+        <p class="process-desc">Share your requirements with us ? in-person, by call or WhatsApp. We understand your vision.</p>
+      </div>
+      <div class="process-card reveal delay-200">
+        <div class="process-number">02</div>
+        <h3 class="process-title">Design &amp; Quote</h3>
+        <p class="process-desc">Our designers create detailed 2D/3D mockups and provide a transparent, competitive quote.</p>
+      </div>
+      <div class="process-card reveal delay-300">
+        <div class="process-number">03</div>
+        <h3 class="process-title">Manufacturing</h3>
+        <p class="process-desc">Your signage is precision-manufactured in our facility using quality materials and equipment.</p>
+      </div>
+      <div class="process-card reveal delay-400">
+        <div class="process-number">04</div>
+        <h3 class="process-title">Installation</h3>
+        <p class="process-desc">Our experienced installation team handles on-site fixing, wiring and finishing to perfection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------------------------- GALLERY ---------------------------------- -->
+<section class="section section-gray" id="portfolio">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow">Our Work</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">A glimpse of the diverse, high-quality signage work we've delivered across Ahmedabad.</p>
+    </div>
+
+    <div class="home-gallery" id="homeGallery">
+      <div class="gallery-item reveal" data-src="assets/images/ACP-Elevation-A_Chintu-Art.webp" data-caption="ACP Elevation ? Commercial Building">
+        <img src="assets/images/ACP-Elevation-A_Chintu-Art.webp" alt="ACP Elevation" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>ACP Elevation</h4><span>Commercial</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+      <div class="gallery-item reveal delay-100" data-src="assets/images/Karnavati-Snacks_Chintu-Art.webp" data-caption="Karnavati Snacks ? Outlet Branding">
+        <img src="assets/images/Karnavati-Snacks_Chintu-Art.webp" alt="Outlet Branding" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Karnavati Snacks</h4><span>Outlet Branding</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+      <div class="gallery-item reveal delay-200" data-src="assets/images/LED-Neon_Chintu-Art.webp" data-caption="LED Neon Sign ? Custom Design">
+        <img src="assets/images/LED-Neon_Chintu-Art.webp" alt="LED Neon" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>LED Neon Sign</h4><span>Custom Design</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+      <div class="gallery-item reveal delay-100" data-src="assets/images/Arista_Pylon_Chintu-Art.webp" data-caption="Arista Pylon Signage">
+        <img src="assets/images/Arista_Pylon_Chintu-Art.webp" alt="Pylon" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Arista Pylon</h4><span>Pylon Structure</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+      <div class="gallery-item reveal delay-200" data-src="assets/images/New-Mehfil_Chintu-Art.webp" data-caption="New Mehfil Restaurant Branding">
+        <img src="assets/images/New-Mehfil_Chintu-Art.webp" alt="Branding" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>New Mehfil</h4><span>Restaurant Branding</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+      <div class="gallery-item reveal delay-300" data-src="assets/images/Kanan-Prep_ACP-CNC-Cutting_Chintu-Art.webp" data-caption="Kanan Prep ? ACP CNC Cutting">
+        <img src="assets/images/Kanan-Prep_ACP-CNC-Cutting_Chintu-Art.webp" alt="CNC Cutting" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Kanan Prep</h4><span>ACP CNC Cutting</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+      <div class="gallery-item reveal" data-src="assets/images/Lampros_Chintu-Art.webp" data-caption="Lampros Building Signage">
+        <img src="assets/images/Lampros_Chintu-Art.webp" alt="Building Signage" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Lampros</h4><span>Building Signage</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+      <div class="gallery-item reveal delay-100" data-src="assets/images/Pushya-Hospital_Chintu-Art.webp" data-caption="Pushya Hospital Signage">
+        <img src="assets/images/Pushya-Hospital_Chintu-Art.webp" alt="Hospital Signage" loading="lazy">
+        <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Pushya Hospital</h4><span>Hospital Signage</span></div></div>
+        <div class="gallery-zoom"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <a href="whats-new.html" class="btn btn-outline-dark btn-lg">
+        View All Our Work
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------------------------- CLIENTS ---------------------------------- -->
+<section class="ticker-section">
+  <div class="container">
+    <p style="text-align:center;font-size:0.88rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;text-shadow:0 0 18px rgba(245,179,1,0.45);">— &nbsp;Brands We've Worked With &nbsp;—</p>
+  </div>
+  <div class="ticker-wrapper">
+    <div class="ticker-track">
+      <img src="assets/images/brands/108.jpg" alt="108" loading="lazy">
+      <img src="assets/images/brands/91%20Threads.jpg" alt="91 Threads" loading="lazy">
+      <img src="assets/images/brands/Acer.jpg" alt="Acer" loading="lazy">
+      <img src="assets/images/brands/Amaron.jpg" alt="Amaron" loading="lazy">
+      <img src="assets/images/brands/AMC.jpg" alt="AMC" loading="lazy">
+      <img src="assets/images/brands/Andhjan%20Mandal.jpg" alt="Andhjan Mandal" loading="lazy">
+      <img src="assets/images/brands/Anlytics%20Solution.jpg" alt="Anlytics Solution" loading="lazy">
+      <img src="assets/images/brands/Arista.jpg" alt="Arista" loading="lazy">
+      <img src="assets/images/brands/Aurita.jpg" alt="Aurita" loading="lazy">
+      <img src="assets/images/brands/B%20Desai.jpg" alt="B Desai" loading="lazy">
+      <img src="assets/images/brands/Dalal%20Group.jpg" alt="Dalal Group" loading="lazy">
+      <img src="assets/images/brands/Decathlon.jpg" alt="Decathlon" loading="lazy">
+      <img src="assets/images/brands/EPFO.jpg" alt="EPFO" loading="lazy">
+      <img src="assets/images/brands/Exide.jpg" alt="Exide" loading="lazy">
+      <img src="assets/images/brands/Gajanand.jpg" alt="Gajanand" loading="lazy">
+      <img src="assets/images/brands/Gallops%20Hyundai.jpg" alt="Gallops Hyundai" loading="lazy">
+      <img src="assets/images/brands/Genexplore.jpg" alt="Genexplore" loading="lazy">
+      <img src="assets/images/brands/Govt.%20of%20Inda.jpg" alt="Govt. of India" loading="lazy">
+      <img src="assets/images/brands/Guj%20Vidhyapith.jpg" alt="Guj Vidhyapith" loading="lazy">
+      <img src="assets/images/brands/Honest.jpg" alt="Honest" loading="lazy">
+      <img src="assets/images/brands/INI.jpg" alt="INI" loading="lazy">
+      <img src="assets/images/brands/Karnavati%20Snacks.jpg" alt="Karnavati Snacks" loading="lazy">
+      <img src="assets/images/brands/Kore.jpg" alt="Kore" loading="lazy">
+      <img src="assets/images/brands/La%20Renon.jpg" alt="La Renon" loading="lazy">
+      <img src="assets/images/brands/Laxmi%20Developers.jpg" alt="Laxmi Developers" loading="lazy">
+      <img src="assets/images/brands/Martinoz.jpg" alt="Martinoz" loading="lazy">
+      <img src="assets/images/brands/Miraclus.jpg" alt="Miraclus" loading="lazy">
+      <img src="assets/images/brands/MK.jpg" alt="MK" loading="lazy">
+      <img src="assets/images/brands/Opp.jpg" alt="Opp" loading="lazy">
+      <img src="assets/images/brands/Patel.jpg" alt="Patel" loading="lazy">
+      <img src="assets/images/brands/Pinelabs.jpg" alt="Pinelabs" loading="lazy">
+      <img src="assets/images/brands/Pizza%20ZOonr.jpg" alt="Pizza ZOonr" loading="lazy">
+      <img src="assets/images/brands/Plus%20Fitness.jpg" alt="Plus Fitness" loading="lazy">
+      <img src="assets/images/brands/Rudra.jpg" alt="Rudra" loading="lazy">
+      <img src="assets/images/brands/Shafalya.jpg" alt="Shafalya" loading="lazy">
+      <img src="assets/images/brands/Shilp.jpg" alt="Shilp" loading="lazy">
+      <img src="assets/images/brands/Shivalik.jpg" alt="Shivalik" loading="lazy">
+      <img src="assets/images/brands/Solitare%20Sky.jpg" alt="Solitare Sky" loading="lazy">
+      <img src="assets/images/brands/Sterling.jpg" alt="Sterling" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------ TESTIMONIALS -------------------------------- -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow" style="color:rgba(245,179,1,1)">What Clients Say</div>
+      <h2 class="section-title" style="color:var(--white)">Trusted by Businesses Across Ahmedabad</h2>
+    </div>
+    <div class="grid-3" style="gap:24px;">
+      <div class="testimonial-card reveal delay-100">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Outstanding work on our outlet branding. The signages are top quality and the team was very professional throughout. Highly recommended for any business!"</p>
+        <div class="testimonial-author">
+          <img src="assets/images/brands/Dhabkar.jpg" alt="Dhabkar Super Speciality Hospital" style="width:52px;height:52px;border-radius:10px;object-fit:contain;background:#fff;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);flex-shrink:0;">
+          <div>
+            <div class="testimonial-name">Dhabkar Super Speciality Hospital</div>
+            <div class="testimonial-role">Healthcare, Ahmedabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-200">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"The LED neon sign they made for our caf&eacute; became an instant Instagram favourite! Beautiful craftsmanship and delivered exactly on time. Will definitely work with them again."</p>
+        <div class="testimonial-author">
+          <img src="assets/images/brands/Shafalya.jpg" alt="Shafalya Infra" style="width:52px;height:52px;border-radius:10px;object-fit:contain;background:#fff;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);flex-shrink:0;">
+          <div>
+            <div class="testimonial-name">Shafalya Infra</div>
+            <div class="testimonial-role">Infrastructure, Ahmedabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-300">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Chintu Art did our full hospital signage and the result was exceptional. Clear, professional, and perfectly executed. Very happy with the quality and speed of work."</p>
+        <div class="testimonial-author">
+          <img src="assets/images/brands/Gallops%20Hyundai.jpg" alt="Gallops Hyundai" style="width:52px;height:52px;border-radius:10px;object-fit:contain;background:#fff;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);flex-shrink:0;">
+          <div>
+            <div class="testimonial-name">Gallops Hyundai</div>
+            <div class="testimonial-role">Automobile Dealership, Ahmedabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-100">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Chintu Art handled our complete store signage and branding across multiple outlets with exceptional precision. The quality of materials and finishing is outstanding. A truly reliable partner for large-scale projects!"</p>
+        <div class="testimonial-author">
+          <img src="assets/images/brands/Decathlon.jpg" alt="Decathlon" style="width:52px;height:52px;border-radius:10px;object-fit:contain;background:#fff;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);flex-shrink:0;">
+          <div>
+            <div class="testimonial-name">Decathlon</div>
+            <div class="testimonial-role">Sports Retail, Ahmedabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-200">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"We engaged Chintu Art for our official office signage and directional boards. The work reflects professionalism and attention to detail at every step. Delivered on time and well within specifications."</p>
+        <div class="testimonial-author">
+          <img src="assets/images/brands/EPFO.jpg" alt="EPFO" style="width:52px;height:52px;border-radius:10px;object-fit:contain;background:#fff;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);flex-shrink:0;">
+          <div>
+            <div class="testimonial-name">EPFO</div>
+            <div class="testimonial-role">Government Organisation, Ahmedabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-300">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Chintu Art executed our civic signage project with great efficiency and quality. From design to installation, every aspect was handled professionally. We are very satisfied with the outcome and would recommend them wholeheartedly."</p>
+        <div class="testimonial-author">
+          <img src="assets/images/brands/AMC.jpg" alt="AMC" style="width:52px;height:52px;border-radius:10px;object-fit:contain;background:#fff;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);flex-shrink:0;">
+          <div>
+            <div class="testimonial-name">AMC</div>
+            <div class="testimonial-role">Municipal Corporation, Ahmedabad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------ WHY CHOOSE US ------------------------------- -->
+<section class="section section-navy">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow" style="color:rgba(245,179,1,1)">Why Chintuart</div>
+      <h2 class="section-title" style="color:var(--white)">The Chintu Art Signage World Difference</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal delay-100">
+        <div class="why-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 3 18 3 21 9 12 22 3 9"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="12" y1="3" x2="12" y2="9"/></svg></div>
+        <h3>Premium Quality Materials</h3>
+        <p>We use only industry-grade materials ? UV-resistant inks, high-grade ACP, marine-grade metals ? for longevity.</p>
+      </div>
+      <div class="why-card reveal delay-200">
+        <div class="why-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3>Fast Turnaround</h3>
+        <p>Efficient production workflow ensures your signages are ready and installed well within your timeline.</p>
+      </div>
+      <div class="why-card reveal delay-300">
+        <div class="why-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+        <h3>Custom Design Team</h3>
+        <p>Our in-house designers collaborate with you to create signages that perfectly match your brand identity.</p>
+      </div>
+      <div class="why-card reveal delay-100">
+        <div class="why-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Expert Installation</h3>
+        <p>Skilled installation team with years of experience handling all types of signage mounting and wiring.</p>
+      </div>
+      <div class="why-card reveal delay-200">
+        <div class="why-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg></div>
+        <h3>After-Sales Support</h3>
+        <p>We don't disappear after installation. Our team provides maintenance and support whenever you need it.</p>
+      </div>
+      <div class="why-card reveal delay-300">
+        <div class="why-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+        <h3>Competitive Pricing</h3>
+        <p>Transparent, honest pricing with no hidden charges. Best value signages for businesses of all sizes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------------------------- CTA ------------------------------------ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <div class="reveal-left">
+        <div class="eyebrow" style="color:var(--primary)">Start Your Project</div>
+        <h2 style="color:var(--white)">Ready to Elevate Your Brand?</h2>
+        <p style="color:rgba(255,255,255,0.65);max-width:480px;">Tell us about your signage needs and we'll get back to you with a personalised design concept and competitive quote ? absolutely free.</p>
+      </div>
+      <div class="cta-actions reveal-right">
+        <a href="contact-us.html" class="btn btn-primary btn-lg">Get a Free Quote</a>
+        <a href="tel:+919924823684" class="btn btn-outline btn-lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer injected by JS -->
+<div id="footer-placeholder"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <img class="lightbox-img" id="lbImg" src="" alt="Gallery Image" style="transition:opacity 0.2s;">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">?</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">?</button>
+  <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">?</button>
+  <p class="lightbox-caption" id="lbCaption"></p>
+</div>
+
+<script>
+  // Duplicate marquee for seamless loop
+  const mt = document.getElementById('marqueeTrack');
+  if (mt) mt.innerHTML += mt.innerHTML;
+</script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

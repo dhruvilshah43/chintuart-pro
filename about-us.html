@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Chintuart — Ahmedabad's premier signage company. Meet our team, learn our story and discover why 500+ clients trust us for all their signage needs.">
+  <title>About Us — Chintuart | Signage Experts, Ahmedabad</title>
+  <link rel="icon" href="assets/images/Chintu-Art_PDF_New-Logo-1-removebg-preview.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .value-card {
+      padding: 32px 28px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      text-align: center;
+    }
+    .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: rgba(230,56,41,0.2); }
+    .value-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .value-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .value-desc  { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin: 0; }
+    /* ── Timeline ────────────────────────────────────────────── */
+    .tl-section { overflow: hidden; position: relative; background: var(--light); }
+    .tl-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(230,56,41,0.035) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .tl-wrap { position: relative; max-width: 880px; margin: 0 auto; }
+
+    /* Vertical spine */
+    .tl-spine {
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 2px;
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top center;
+      background: linear-gradient(to bottom, var(--primary) 0%, var(--gold) 50%, var(--primary) 100%);
+      border-radius: 2px;
+      transition: transform 1.8s cubic-bezier(0.4,0,0.2,1);
+    }
+    .tl-spine.tl-drawn { transform: translateX(-50%) scaleY(1); }
+
+    /* Row */
+    .tl-item {
+      display: grid;
+      grid-template-columns: 1fr 52px 1fr;
+      align-items: flex-start;
+      margin-bottom: 36px;
+      padding: 8px 0;
+    }
+
+    /* Center node */
+    .tl-node {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 30px;
+      position: relative;
+      z-index: 2;
+    }
+    .tl-dot {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 5px rgba(230,56,41,0.18);
+      display: block;
+      position: relative;
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+    }
+    .tl-dot::after {
+      content: '';
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(230,56,41,0.28);
+      animation: tl-ping 2.8s ease-out infinite;
+    }
+    @keyframes tl-ping {
+      0%   { transform: scale(1);   opacity: .75; }
+      80%  { transform: scale(2);   opacity: 0;   }
+      100% { transform: scale(2);   opacity: 0;   }
+    }
+    .tl-dot-gold {
+      background: var(--gold) !important;
+      box-shadow: 0 0 0 5px rgba(245,179,1,0.22) !important;
+    }
+    .tl-dot-gold::after { border-color: rgba(245,179,1,0.32) !important; }
+    .tl-item:hover .tl-dot {
+      transform: scale(1.4);
+      box-shadow: 0 0 0 8px rgba(230,56,41,0.12), 0 4px 20px rgba(230,56,41,0.35);
+    }
+
+    /* Card */
+    .tl-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 26px 24px 22px;
+      box-shadow: 0 4px 20px rgba(20,20,43,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+    .tl-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      border-radius: 2px 2px 0 0;
+      transition: transform .4s ease;
+    }
+    .tl-item:hover .tl-card {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 44px rgba(20,20,43,0.13);
+      border-color: rgba(230,56,41,0.22);
+    }
+    .tl-item:hover .tl-card::before { transform: scaleX(1); }
+
+    /* Highlighted "Today" card */
+    .tl-card-hl {
+      background: linear-gradient(135deg, var(--darker) 0%, var(--navy) 100%);
+      border-color: rgba(245,179,1,0.3);
+      box-shadow: 0 8px 36px rgba(0,0,0,0.18);
+    }
+    .tl-card-hl::before { background: linear-gradient(90deg, var(--gold), var(--primary)); }
+    .tl-card-hl .tl-title { color: #fff; }
+    .tl-card-hl .tl-desc  { color: rgba(255,255,255,0.68); }
+    .tl-item:hover .tl-card-hl {
+      box-shadow: 0 18px 56px rgba(0,0,0,0.28);
+    }
+
+    /* Arrow from left card toward center */
+    .tl-left  .tl-card { grid-column:1; padding-right:28px; }
+    .tl-left  .tl-node { grid-column:2; }
+    .tl-left  .tl-empty{ grid-column:3; }
+    .tl-left  .tl-card::after {
+      content:''; position:absolute;
+      right:-8px; top:36px;
+      width:14px; height:14px;
+      background:inherit;
+      border-top:1px solid var(--border);
+      border-right:1px solid var(--border);
+      transform:rotate(45deg);
+      border-radius:2px;
+    }
+    .tl-left .tl-card-hl::after { border-color:rgba(245,179,1,0.3); }
+
+    /* Arrow from right card toward center */
+    .tl-right .tl-card { grid-column:3; padding-left:28px; }
+    .tl-right .tl-node { grid-column:2; }
+    .tl-right .tl-empty{ grid-column:1; }
+    .tl-right .tl-card::after {
+      content:''; position:absolute;
+      left:-8px; top:36px;
+      width:14px; height:14px;
+      background:inherit;
+      border-bottom:1px solid var(--border);
+      border-left:1px solid var(--border);
+      transform:rotate(45deg);
+      border-radius:2px;
+    }
+
+    /* Inner text */
+    .tl-badge {
+      display:inline-flex; align-items:center;
+      font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--primary); background:var(--primary-light);
+      padding:3px 11px; border-radius:var(--radius-pill);
+      margin-bottom:10px;
+    }
+    .tl-badge-gold { color:#a87200; background:rgba(245,179,1,0.16); }
+    .tl-card-hl .tl-badge { color:var(--gold); background:rgba(245,179,1,0.15); }
+    .tl-icon { font-size:1.8rem; line-height:1; margin-bottom:8px; }
+    .tl-title { font-size:1.02rem; font-weight:700; color:var(--dark); margin-bottom:8px; line-height:1.35; }
+    .tl-desc  { font-size:.86rem; color:var(--text-muted); line-height:1.72; margin:0; }
+
+    /* Mobile — single column */
+    @media(max-width:768px){
+      .tl-spine { left:18px; }
+      .tl-item  { grid-template-columns:36px 1fr; }
+      .tl-left .tl-card, .tl-right .tl-card { grid-column:2; grid-row:1; padding:20px 18px; padding-right:18px; padding-left:18px; }
+      .tl-left .tl-node, .tl-right .tl-node { grid-column:1; grid-row:1; padding-top:26px; }
+      .tl-left .tl-empty, .tl-right .tl-empty { display:none; }
+      .tl-left .tl-card::after, .tl-right .tl-card::after { display:none; }
+    }
+    .team-card-social { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+    .team-social-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--gray-700); transition: var(--transition); }
+    .team-social-btn:hover { background: var(--primary); color: var(--white); }
+  </style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<!-- Page Hero -->
+<section class="page-hero" style="min-height:380px;">
+  <div class="hero-bg" style="background-image:url('assets/images/KS_Karnavati-Snacks_Chintu-Art_WYS.webp')"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>About Us</span>
+      </nav>
+      <div class="eyebrow" style="color:var(--gold)">Our Story</div>
+      <h1>About Chintuart</h1>
+      <p>Ahmedabad's most trusted signage &amp; outdoor advertising specialists — crafting brand stories since over a decade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ About Intro ══ -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:60px;align-items:center;">
+      <div class="reveal-left">
+        <div class="about-img-main">
+          <img src="assets/images/Lampros_Chintu-Art-1.webp" alt="Chintuart Workshop" loading="lazy" style="width:100%;max-height:500px;object-fit:cover;border-radius:var(--radius-xl);">
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="eyebrow">Who We Are</div>
+        <h2 class="section-title">More Than Just Signages</h2>
+        <p>
+          Chintuart is Ahmedabad's leading signage and outdoor advertising company,
+          known for blending creative design with precision manufacturing to deliver
+          signs that truly represent your brand.
+        </p>
+        <p style="margin-top:14px;">
+          From the very first consultation to the final installation, we are with you at every step.
+          Our team of experienced designers, fabricators, and installers work with dedication to ensure
+          that every sign we deliver exceeds expectations in quality, aesthetics, and durability.
+        </p>
+        <p style="margin-top:14px;">
+          Located in Ahmedabad, Gujarat, we proudly serve businesses of all sizes — from local
+          shops to large commercial establishments, hospitals, restaurants, residential projects,
+          and everything in between.
+        </p>
+        <div class="features-list" style="margin-top:24px;">
+          <div class="feature-item">
+            <div class="feature-icon">🏆</div>
+            <div class="feature-text">
+              <h4>12+ Years of Excellence</h4>
+              <p>A proven track record of delivering quality signages across Ahmedabad.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🤝</div>
+            <div class="feature-text">
+              <h4>500+ Happy Clients</h4>
+              <p>Trusted by hundreds of businesses — from startups to established brands.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🏭</div>
+            <div class="feature-text">
+              <h4>In-House Manufacturing</h4>
+              <p>Full control over quality — everything is designed and made in our own facility.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Values ══ -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow">Our Values</div>
+      <h2 class="section-title">What Drives Us</h2>
+    </div>
+    <div class="grid-3" style="gap:20px;">
+      <div class="value-card reveal delay-100">
+        <div class="value-icon">💎</div>
+        <h3 class="value-title">Uncompromising Quality</h3>
+        <p class="value-desc">We never cut corners. Every material, every weld, every print is held to the highest standard of quality.</p>
+      </div>
+      <div class="value-card reveal delay-200">
+        <div class="value-icon">💡</div>
+        <h3 class="value-title">Creative Innovation</h3>
+        <p class="value-desc">We stay ahead of trends in signage design, materials, and lighting technology to offer you the best solutions.</p>
+      </div>
+      <div class="value-card reveal delay-300">
+        <div class="value-icon">🤝</div>
+        <h3 class="value-title">Client Partnership</h3>
+        <p class="value-desc">We treat every client project as our own. Your success and satisfaction is our ultimate goal.</p>
+      </div>
+      <div class="value-card reveal delay-100">
+        <div class="value-icon">⏰</div>
+        <h3 class="value-title">Timely Delivery</h3>
+        <p class="value-desc">We respect your deadlines. Our streamlined workflow ensures projects are always delivered on time.</p>
+      </div>
+      <div class="value-card reveal delay-200">
+        <div class="value-icon">🌱</div>
+        <h3 class="value-title">Sustainable Practices</h3>
+        <p class="value-desc">We prioritise LED technology and materials with lower environmental impact wherever possible.</p>
+      </div>
+      <div class="value-card reveal delay-300">
+        <div class="value-icon">📞</div>
+        <h3 class="value-title">Ongoing Support</h3>
+        <p class="value-desc">Our relationship doesn't end at installation. We're always available for maintenance and guidance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Team ══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow">Meet the Team</div>
+      <h2 class="section-title">The People Behind Chintu Art (Signage World)</h2>
+      <p class="section-subtitle">Our dedicated team of professionals brings skill, passion and years of expertise to every project.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px;max-width:740px;margin:0 auto;">
+
+      <!-- Chandrasinh — Founder & Owner -->
+      <div class="team-card reveal delay-100">
+        <div class="team-card-img">
+          <img src="assets/images/profile/Chandrsingh.jpg" alt="Chandrasinh Vijaysinh Namha" loading="lazy">
+        </div>
+        <div class="team-card-body">
+          <h3 class="team-card-name">Chandrasinh Vijaysinh Namha (Chintu)</h3>
+          <p class="team-card-role">Founder &amp; Owner</p>
+          <p style="font-size:0.83rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">The visionary behind Chintuart — leads the business with 20+ years of signage industry expertise and an unwavering passion for quality.</p>
+          <div class="team-card-social">
+            <a href="tel:+919924823684" class="team-social-btn" title="Call">📞</a>
+            <a href="https://wa.me/919924823684" class="team-social-btn" title="WhatsApp" target="_blank">💬</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kushsinh — Co-Founder & Owner -->
+      <div class="team-card reveal delay-200">
+        <div class="team-card-img">
+          <img src="assets/images/profile/Kushsinh.jpg" alt="Kushsinh Vijaysinh Namha" loading="lazy">
+        </div>
+        <div class="team-card-body">
+          <h3 class="team-card-name">Kushsinh Vijaysinh Namha (Bittu)</h3>
+          <p class="team-card-role">Co-Founder &amp; Owner</p>
+          <p style="font-size:0.83rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Oversees manufacturing, operations and client relationships — ensuring every project is delivered on time and to the highest standard.</p>
+          <div class="team-card-social">
+            <a href="tel:+918530477584" class="team-social-btn" title="Call">📞</a>
+            <a href="https://wa.me/918530477584" class="team-social-btn" title="WhatsApp" target="_blank">💬</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ Journey / Timeline ══ -->
+<section class="section tl-section" id="journey">
+  <div class="container">
+
+    <div class="section-header center reveal" style="margin-bottom:72px;">
+      <div class="eyebrow">Our Journey</div>
+      <h2 class="section-title">Building a Legacy<br>in Signage</h2>
+      <p class="section-subtitle">From a small workshop in Ahmedabad to the city's most trusted signage studio — driven by quality, passion, and an uncompromising commitment to excellence.</p>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-spine"></div>
+
+      <!-- 1 ── Left -->
+      <div class="tl-item tl-left reveal-left">
+        <div class="tl-card">
+          <span class="tl-badge">Early 2010s</span>
+          <div class="tl-icon">🏢</div>
+          <h3 class="tl-title">Founded in Ahmedabad</h3>
+          <p class="tl-desc">Chintuart was established with a clear mission: to bring professional, high-quality signage to local businesses in Ahmedabad.</p>
+        </div>
+        <div class="tl-node"><span class="tl-dot"></span></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <!-- 2 ── Right -->
+      <div class="tl-item tl-right reveal-right delay-100">
+        <div class="tl-empty"></div>
+        <div class="tl-node"><span class="tl-dot"></span></div>
+        <div class="tl-card">
+          <span class="tl-badge">2015</span>
+          <div class="tl-icon">💡</div>
+          <h3 class="tl-title">Expanded Services</h3>
+          <p class="tl-desc">Introduced LED neon signs, ACP elevation panels, and precision CNC cutting — expanding our service portfolio significantly.</p>
+        </div>
+      </div>
+
+      <!-- 3 ── Left -->
+      <div class="tl-item tl-left reveal-left delay-100">
+        <div class="tl-card">
+          <span class="tl-badge">2018</span>
+          <div class="tl-icon">🏭</div>
+          <h3 class="tl-title">State-of-the-Art Facility</h3>
+          <p class="tl-desc">Invested in a full-scale manufacturing facility with advanced machinery for laser cutting, metal fabrication and digital printing.</p>
+        </div>
+        <div class="tl-node"><span class="tl-dot"></span></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <!-- 4 ── Right -->
+      <div class="tl-item tl-right reveal-right delay-200">
+        <div class="tl-empty"></div>
+        <div class="tl-node"><span class="tl-dot"></span></div>
+        <div class="tl-card">
+          <span class="tl-badge">2021–23</span>
+          <div class="tl-icon">🎯</div>
+          <h3 class="tl-title">500+ Projects Milestone</h3>
+          <p class="tl-desc">Crossed the milestone of 500+ completed projects, serving clients across retail, hospitality, healthcare and real estate sectors.</p>
+        </div>
+      </div>
+
+      <!-- 5 ── Left · TODAY (highlighted) -->
+      <div class="tl-item tl-left reveal-left delay-200">
+        <div class="tl-card tl-card-hl">
+          <span class="tl-badge tl-badge-gold">Today</span>
+          <div class="tl-icon">🏆</div>
+          <h3 class="tl-title">Ahmedabad's #1 Signage Brand</h3>
+          <p class="tl-desc">Recognised as one of Ahmedabad's most trusted signage companies with 800+ projects and a growing list of satisfied clients.</p>
+        </div>
+        <div class="tl-node"><span class="tl-dot tl-dot-gold"></span></div>
+        <div class="tl-empty"></div>
+      </div>
+
+    </div><!-- /tl-wrap -->
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <div class="reveal-left">
+        <div class="eyebrow" style="color:var(--primary)">Work With Us</div>
+        <h2 style="color:var(--white)">Let's Create Something Great Together</h2>
+        <p style="color:rgba(255,255,255,0.65);max-width:460px;">Ready to elevate your brand presence? Reach out to our team today for a free design consultation and quote.</p>
+      </div>
+      <div class="cta-actions reveal-right">
+        <a href="contact-us.html" class="btn btn-primary btn-lg">Start a Project</a>
+        <a href="tel:+919924823684" class="btn btn-outline btn-lg">📞 +91 9924823684</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<div class="lightbox" id="lightbox">
+  <img class="lightbox-img" id="lbImg" src="" alt="" style="transition:opacity 0.2s;">
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev">‹</button>
+  <button class="lightbox-nav lightbox-next" id="lbNext">›</button>
+  <p class="lightbox-caption" id="lbCaption"></p>
+</div>
+<script src="assets/js/main.js"></script>
+<script>
+/* Timeline spine draw-on-scroll */
+(function(){
+  var spine = document.querySelector('.tl-spine');
+  if (!spine) return;
+  var obs = new IntersectionObserver(function(entries){
+    if (entries[0].isIntersecting) { spine.classList.add('tl-drawn'); obs.disconnect(); }
+  }, { threshold: 0.05 });
+  obs.observe(spine.parentElement);
+})();
+</script>
+</html>
