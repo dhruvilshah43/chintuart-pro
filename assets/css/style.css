@@ -1645,9 +1645,38 @@ p  { font-size: 1rem; color: var(--gray-700); line-height: 1.8; }
 }
 .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
 .footer-copy a { color: var(--primary); }
-.footer-legal { display: flex; gap: 20px; }
-.footer-legal a { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
-.footer-legal a:hover { color: var(--white); }
+
+/* ─── Developer Credit ────────────────────────────────────────────────────── */
+.footer-dev-credit { display: flex; align-items: center; }
+.footer-dev-text {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.38);
+  background: linear-gradient(90deg, rgba(230,56,41,0.12) 0%, rgba(255,200,60,0.10) 50%, rgba(230,56,41,0.12) 100%);
+  border: 1px solid rgba(230,56,41,0.25);
+  border-radius: 30px;
+  padding: 5px 20px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-dev-text strong {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+.footer-dev-text a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-dev-text a:hover { color: var(--white); }
+.footer-dev-credit:hover .footer-dev-text {
+  color: rgba(255,255,255,0.65);
+  border-color: rgba(230,56,41,0.5);
+}
 
 /* ─── Visitor Counter Widget ──────────────────────────────────────────────── */
 .visitor-counter {

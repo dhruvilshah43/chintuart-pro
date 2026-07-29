@@ -203,9 +203,8 @@ function buildFooter() {
               <span class="visitor-counter-label">Visitors</span>
             </div>
           </div>
-          <div class="footer-legal">
-            <a href="${root}contact-us.html">Contact</a>
-            <a href="${root}about-us.html">About</a>
+          <div class="footer-dev-credit">
+            <span class="footer-dev-text">Developed &amp; Designed by <strong>Dhruvil Shah</strong> &nbsp;·&nbsp; <a href="https://wa.me/919998242316" target="_blank" rel="noopener">+91 9998242316</a></span>
           </div>
         </div>
       </div>
