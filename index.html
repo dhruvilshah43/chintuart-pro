@@ -167,10 +167,19 @@
       width: 100%; height: 100%;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transform: scale(1.06);
+      transition: opacity 1.3s ease-in-out, transform 1.3s ease-in-out;
       z-index: 0;
     }
-    .hero-slide.active { opacity: 1; z-index: 1; }
+    .hero-slide.active {
+      opacity: 1;
+      z-index: 1;
+      animation: hero-ken-burns 7s ease-out forwards;
+    }
+    @keyframes hero-ken-burns {
+      from { transform: scale(1.1); }
+      to   { transform: scale(1.0); }
+    }
     .hero-slide-dots {
       position: absolute;
       bottom: 14px; left: 50%;
@@ -272,13 +281,15 @@
       <div class="hero-visual">
         <div class="hero-img-wrapper">
           <div class="hero-img-main" id="heroSlider">
-            <img class="hero-slide active" src="assets/images/KS_Karnavati-Snacks_Chintu-Art_WYS.webp"   alt="Chintu Art Signage Work" loading="eager">
-            <img class="hero-slide" src="assets/images/Arista_Pylon_Chintu-Art.webp"                     alt="Pylon Signage" loading="lazy">
-            <img class="hero-slide" src="assets/images/LED-Neon_Chintu-Art.webp"                         alt="LED Neon Sign" loading="lazy">
-            <img class="hero-slide" src="assets/images/ACP-Elevation-A_Chintu-Art.webp"                  alt="ACP Elevation" loading="lazy">
-            <img class="hero-slide" src="assets/images/New-Mehfil_Chintu-Art.webp"                       alt="Restaurant Branding" loading="lazy">
-            <img class="hero-slide" src="assets/images/Emberlynn_LED-Backlite_Chintu-Art.webp"           alt="LED Backlite Signage" loading="lazy">
-            <img class="hero-slide" src="assets/images/Karnavati-Snacks_Chintu-Art.webp"                 alt="Outlet Branding" loading="lazy">
+            <img class="hero-slide active" src="assets/images/main_page_photos/Acrylic%20laser%20cutting.jpeg"        alt="Acrylic Laser Cutting" loading="eager">
+            <img class="hero-slide" src="assets/images/main_page_photos/hoardings.jpeg"                              alt="Outdoor Hoardings" loading="lazy">
+            <img class="hero-slide" src="assets/images/main_page_photos/ms%20laser%20cutting.jpeg"                   alt="MS Laser Cutting" loading="lazy">
+            <img class="hero-slide" src="assets/images/main_page_photos/SS%20Letters%20backside%20light.jpeg"        alt="SS Letters Backside Light" loading="lazy">
+            <img class="hero-slide" src="assets/images/main_page_photos/SS%20Letters%20Backside%20llight.jpeg"       alt="SS Letters Backside Glow" loading="lazy">
+            <img class="hero-slide" src="assets/images/main_page_photos/ss%20letters%20with%20light.jpeg"            alt="SS Letters With Light" loading="lazy">
+            <img class="hero-slide" src="assets/images/main_page_photos/Terrace%20sign%20a.jpeg"                     alt="Terrace Signage" loading="lazy">
+            <img class="hero-slide" src="assets/images/main_page_photos/terrace%20sign.jpeg"                         alt="Terrace Sign" loading="lazy">
+            <img class="hero-slide" src="assets/images/main_page_photos/terrace%20signage.jpeg"                      alt="Terrace Signage Project" loading="lazy">
             <button class="hero-slider-arrow hero-slider-prev" id="heroSliderPrev" aria-label="Previous slide">&#8249;</button>
             <button class="hero-slider-arrow hero-slider-next" id="heroSliderNext" aria-label="Next slide">&#8250;</button>
             <div class="hero-slide-dots" id="heroSliderDots"></div>
