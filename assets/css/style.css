@@ -2020,8 +2020,58 @@ p  { font-size: 1rem; color: var(--gray-700); line-height: 1.8; }
   :root { --section-py: 56px; --header-h: 68px; }
   .main-nav { display: none; }
   .menu-toggle { display: flex; }
-  .hero-content { grid-template-columns: 1fr; gap: 40px; padding-bottom: 60px; }
-  .hero-visual { display: none; }
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-bottom: 56px;
+  }
+
+  /* ── Hero image: show on mobile, full-width ── */
+  .hero-visual {
+    display: flex;
+    width: 100%;
+  }
+  /* Remove decorative dot-grid corner on mobile (too busy) */
+  .hero-visual::after { display: none; }
+
+  .hero-img-wrapper {
+    max-width: 100%;
+    width: 100%;
+    padding: 14px 14px 52px 14px; /* bottom space for Award badge overflow */
+  }
+  /* Keep rotating border but tighten it */
+  .hero-img-wrapper::before {
+    top: 14px; left: 14px; right: 14px; bottom: 52px;
+  }
+  .hero-img-main {
+    aspect-ratio: 16 / 10; /* slightly wider on mobile for better fit */
+  }
+  /* Shrink slider arrows on mobile */
+  .hero-slider-arrow {
+    width: 34px; height: 34px;
+    font-size: 1rem;
+    opacity: 1; /* always visible on mobile (no hover) */
+  }
+  /* Award-Winning badge — keep but compact */
+  .hero-img-badge {
+    bottom: 4px; left: 4px;
+    padding: 10px 13px;
+    min-width: auto;
+    gap: 9px;
+  }
+  .hero-img-badge-icon {
+    width: 36px; height: 36px;
+    font-size: 1.2rem;
+  }
+  .hero-img-badge-text strong { font-size: 0.8rem; }
+  .hero-img-badge-text span   { font-size: 0.72rem; }
+  /* 5-Star badge — keep, compact */
+  .hero-img-badge-2 {
+    top: 4px; right: 4px;
+    padding: 8px 13px;
+    font-size: 0.78rem;
+  }
+
   .hero-stats { gap: 20px; flex-wrap: wrap; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; }
@@ -2040,6 +2090,12 @@ p  { font-size: 1rem; color: var(--gray-700); line-height: 1.8; }
   .gallery-grid.masonry { columns: 1; }
   .whatsapp-float { bottom: 18px; right: 18px; width: 52px; height: 52px; }
   .stats-grid { grid-template-columns: 1fr; }
+  /* Very small screens: hide Award badge (save space), keep 5-Star */
+  .hero-img-badge { display: none; }
+  .hero-img-badge-2 { font-size: 0.72rem; padding: 6px 11px; }
+  .hero-slider-arrow { width: 30px; height: 30px; }
+  .hero-img-wrapper { padding-bottom: 28px; }
+  .hero-img-wrapper::before { bottom: 28px; }
 }
 
 
@@ -2331,5 +2387,332 @@ p  { font-size: 1rem; color: var(--gray-700); line-height: 1.8; }
 }
 .service-card:hover .service-card-link svg {
   animation: arrow-bounce 0.6s ease infinite;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PROFESSIONAL ANIMATION ENHANCEMENTS — Phase 3
+   Custom Cursor · Particles · Ripple · Split-Text · Scroll Progress
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Scroll Progress Bar ────────────────────────────────────────────────── */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--gold) 60%, var(--primary) 100%);
+  background-size: 200% 100%;
+  z-index: 10002;
+  pointer-events: none;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 10px rgba(230,56,41,0.7), 0 0 4px rgba(245,179,1,0.5);
+  animation: gradient-shift 3s linear infinite;
+  transition: width 0.08s linear;
+}
+
+/* ─── Default cursor restored ────────────────────────────────────────────────── */
+* { cursor: auto; }
+a, button, [role="button"], .btn, .gallery-item, .service-card,
+.filter-btn, .back-to-top, .nav-link, .nav-cta, label { cursor: pointer; }
+input, textarea, select { cursor: text; }
+
+/* ─── Hero Canvas Particles ──────────────────────────────────────────────── */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+/* ─── Button Ripple Effect ───────────────────────────────────────────────── */
+.btn { position: relative; overflow: hidden; }
+.ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  width: 4px; height: 4px;
+  background: rgba(255,255,255,0.32);
+  transform: scale(0);
+  animation: ripple-out 0.65s linear forwards;
+  pointer-events: none;
+}
+@keyframes ripple-out {
+  to { transform: scale(180); opacity: 0; }
+}
+
+/* ─── Split-Char Animation ───────────────────────────────────────────────── */
+.split-heading .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(55%) rotateX(36deg);
+  transform-origin: bottom center;
+  transition: opacity 0.45s cubic-bezier(0.4,0,0.2,1),
+              transform 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.split-heading.chars-in .char {
+  opacity: 1;
+  transform: none;
+}
+.split-heading .space-char { display: inline-block; width: 0.28em; }
+
+/* ─── Section Title Underline Swipe ─────────────────────────────────────── */
+.u-line {
+  position: relative;
+  display: block;
+}
+.u-line::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; left: 0;
+  width: 58px; height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--gold));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.75s cubic-bezier(0.4,0,0.2,1) 0.15s;
+}
+.u-line.ul-visible::after { transform: scaleX(1); }
+/* Centered variant */
+.section-header.center .u-line::after {
+  left: 50%; margin-left: -29px;
+  transform-origin: center;
+}
+
+/* ─── Eyebrow Slide-In ───────────────────────────────────────────────────── */
+.eyebrow {
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.eyebrow.eyebrow-visible { opacity: 1; transform: none; }
+
+/* ─── WhatsApp Float Pulse Ring ──────────────────────────────────────────── */
+.whatsapp-float::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 2px solid rgba(37,211,102,0.75);
+  animation: wa-ring-pulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes wa-ring-pulse {
+  0%   { transform: scale(1);    opacity: 0.75; }
+  100% { transform: scale(1.90); opacity: 0; }
+}
+
+/* ─── Image Blur-Up Loader ───────────────────────────────────────────────── */
+img.lazy-blur {
+  filter: blur(10px);
+  transition: filter 0.55s ease;
+}
+img.lazy-blur.lazy-loaded { filter: blur(0); }
+
+/* ─── Gallery Item Lift & Tilt ───────────────────────────────────────────── */
+.gallery-item {
+  transition: box-shadow 0.4s ease;
+}
+.gallery-item:hover {
+  box-shadow: 0 22px 55px rgba(0,0,0,0.3);
+  z-index: 3;
+}
+
+/* ─── Service Card Entrance Stagger (JS-driven) ──────────────────────────── */
+.services-showcase .service-card,
+.services-grid .service-card {
+  --card-delay: 0s;
+  transition-delay: var(--card-delay);
+}
+
+/* ─── Animated Gradient Section Accent ──────────────────────────────────── */
+.section-header .section-title {
+  position: relative;
+}
+
+/* ─── Process Number Ring Glow ───────────────────────────────────────────── */
+@keyframes process-number-glow {
+  0%,100% { box-shadow: 0 0 0 0   rgba(230,56,41,0.0),  0 0 0 0  rgba(245,179,1,0.0); }
+  50%     { box-shadow: 0 0 0 12px rgba(230,56,41,0.12), 0 0 18px rgba(245,179,1,0.10); }
+}
+.process-card:hover .process-number {
+  animation: process-number-glow 1.8s ease-in-out infinite;
+}
+
+/* ─── Floating Icon in Why Cards ─────────────────────────────────────────── */
+@keyframes why-icon-drift {
+  0%,100% { transform: translateY(0) rotate(0deg) scale(1); }
+  35%     { transform: translateY(-6px) rotate(4deg) scale(1.06); }
+  70%     { transform: translateY(-3px) rotate(-3deg) scale(1.02); }
+}
+.why-card:hover .why-icon {
+  animation: why-icon-drift 2.2s ease-in-out infinite !important;
+}
+
+/* ─── Stats Card Shine on Hover ──────────────────────────────────────────── */
+.stat-card {
+  isolation: isolate;
+  overflow: hidden;
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 55%; height: 100%;
+  background: linear-gradient(105deg,
+    transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%);
+  transform: skewX(-18deg);
+  transition: left 0.65s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+.stat-card:hover::after { left: 145%; }
+
+/* ─── CTA Section Animated Orbs ─────────────────────────────────────────── */
+.cta-section::before {
+  animation: orb-float-a 8s ease-in-out infinite;
+}
+.cta-section::after {
+  animation: orb-float-b 10s ease-in-out infinite;
+}
+
+/* ─── Contact Card Hover ─────────────────────────────────────────────────── */
+.contact-card {
+  position: relative;
+  overflow: hidden;
+}
+.contact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(230,56,41,0.04) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.contact-card:hover::before { opacity: 1; }
+
+/* ─── Section Gray Grid Overlay ──────────────────────────────────────────── */
+.section-gray {
+  position: relative;
+  isolation: isolate;
+}
+.section-gray::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(230,56,41,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230,56,41,0.025) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 0;
+}
+.section-gray > .container { position: relative; z-index: 1; }
+
+/* ─── Footer Social Bounce ───────────────────────────────────────────────── */
+.footer-social {
+  transition: background 0.28s ease, color 0.28s ease,
+              transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              border-color 0.28s ease;
+}
+.footer-social:hover {
+  transform: translateY(-5px) scale(1.15);
+}
+
+/* ─── Page Transition Overlay ────────────────────────────────────────────── */
+.page-trans-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--dark);
+  z-index: 99997;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.page-trans-overlay.fade-out { opacity: 1; }
+
+/* ─── Back-to-Top Enhanced ───────────────────────────────────────────────── */
+.back-to-top {
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              background 0.28s ease;
+}
+.back-to-top:hover {
+  transform: translateY(-5px) scale(1.12);
+  background: var(--gold);
+  color: var(--dark);
+}
+
+/* ─── Nav Link Magnetic Pill ─────────────────────────────────────────────── */
+.nav-link {
+  transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+}
+.nav-link:hover { transform: translateY(-1px); }
+.nav-link.active { transform: none; }
+
+/* ─── Hero Badge Glow Ping ───────────────────────────────────────────────── */
+@keyframes badge-ping {
+  0%,100% { box-shadow: 0 0 0 0 rgba(230,56,41,0.4); }
+  50%     { box-shadow: 0 0 0 10px rgba(230,56,41,0); }
+}
+.hero-badge { animation: badge-ping 3s ease-in-out infinite; }
+
+/* ─── Section Dark Animated Border Top ──────────────────────────────────── */
+.section-dark {
+  position: relative;
+}
+.section-dark::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary) 30%, var(--gold) 60%, transparent);
+  background-size: 200% 100%;
+  animation: accentShift 5s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── About Badge Pulse ──────────────────────────────────────────────────── */
+@keyframes about-badge-pop {
+  0%,100% { transform: scale(1) rotate(-3deg); }
+  50%     { transform: scale(1.07) rotate(-3deg); }
+}
+.about-badge { animation: about-badge-pop 3.5s ease-in-out infinite; }
+
+/* ─── Testimonial Card Glow ──────────────────────────────────────────────── */
+.testimonial-card:hover {
+  box-shadow: 0 0 0 1px rgba(230,56,41,0.22),
+              0 20px 52px rgba(0,0,0,0.38),
+              0 0 30px rgba(230,56,41,0.08) !important;
+}
+
+/* ─── Neon Glow Utility ──────────────────────────────────────────────────── */
+.glow-text {
+  text-shadow:
+    0 0 6px  rgba(230,56,41,0.75),
+    0 0 14px rgba(230,56,41,0.50),
+    0 0 30px rgba(230,56,41,0.25);
+}
+.glow-gold {
+  text-shadow:
+    0 0 6px  rgba(245,179,1,0.75),
+    0 0 14px rgba(245,179,1,0.50),
+    0 0 30px rgba(245,179,1,0.25);
+}
+
+/* ─── Pulse Dot on Live Badge ────────────────────────────────────────────── */
+.hero-badge-dot {
+  animation: badge-dot-pulse 1.5s ease-in-out infinite !important;
+}
+@keyframes badge-dot-pulse {
+  0%,100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(230,56,41,0.7); }
+  50%     { transform: scale(1.3); box-shadow: 0 0 0 6px rgba(230,56,41,0); }
+}
+
+/* ─── Responsive Adjustments ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .scroll-progress-bar { height: 2px; }
+  .section-gray::after { display: none; }
 }
 

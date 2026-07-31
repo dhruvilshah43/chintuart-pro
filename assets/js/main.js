@@ -863,5 +863,370 @@ document.addEventListener('DOMContentLoaded', () => {
     initMouseGlow();
     initMarqueeDuplicate();
     initBrandTooltips();
+    // ── Phase 3: Professional Enhancements ──
+    initScrollProgressBar();
+    initCustomCursor();
+    initButtonRipple();
+    initHeroParticles();
+    initBlurUpImages();
+    initGalleryTilt();
+    initEyebrowReveal();
+    initSplitHeadings();
+    initUnderlineReveal();
+    initServiceCardNumbers();
+    initPageTransitions();
   }, 10);
 });
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PHASE 3 PROFESSIONAL ENHANCEMENTS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Scroll Progress Bar ────────────────────────────────────────────────── */
+function initScrollProgressBar() {
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress-bar';
+  document.body.appendChild(bar);
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (max <= 0) return;
+    bar.style.width = ((window.scrollY / max) * 100).toFixed(2) + '%';
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+/* ─── Custom Cursor ─────────────────────────────────────────────────────── */
+function initCustomCursor() {
+  // Custom cursor disabled — using default browser cursor
+  return;
+
+  // Position tracking
+  let mx = -300, my = -300;  // instant (inner dot)
+  let ox = -300, oy = -300;  // lerped (outer ring)
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    inner.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  }, { passive: true });
+
+  // Smooth lag on outer ring
+  (function lerp() {
+    ox += (mx - ox) * 0.115;
+    oy += (my - oy) * 0.115;
+    outer.style.transform = `translate(${ox}px,${oy}px) translate(-50%,-50%)`;
+    requestAnimationFrame(lerp);
+  })();
+
+  // State manager — click is additive, all others are exclusive
+  const body = document.body;
+
+  function setBase(state) {
+    body.classList.remove('cursor-hover', 'cursor-view', 'cursor-text');
+    if (state) body.classList.add(state);
+  }
+
+  // Links & buttons → hover state
+  document.querySelectorAll(
+    'a, button, [role="button"], .filter-btn, .back-to-top, .service-card, .stat-card'
+  ).forEach(el => {
+    el.addEventListener('mouseenter', () => setBase('cursor-hover'));
+    el.addEventListener('mouseleave', () => setBase(null));
+  });
+
+  // Gallery / portfolio images → VIEW state
+  document.querySelectorAll('.gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => setBase('cursor-view'));
+    el.addEventListener('mouseleave', () => setBase(null));
+  });
+
+  // Hero slider images → VIEW state too
+  document.querySelectorAll('.hero-img-main').forEach(el => {
+    el.addEventListener('mouseenter', () => setBase('cursor-view'));
+    el.addEventListener('mouseleave', () => setBase(null));
+  });
+
+  // Text inputs → blinking bar
+  document.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => setBase('cursor-text'));
+    el.addEventListener('mouseleave', () => setBase(null));
+  });
+
+  // Click (additive — stacks on top of hover/view)
+  document.addEventListener('mousedown', () => body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => body.classList.remove('cursor-click'));
+  document.addEventListener('mouseleave', () => { setBase(null); body.classList.remove('cursor-click'); });
+}
+
+/* ─── Button Ripple Effect ───────────────────────────────────────────────── */
+function initButtonRipple() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn');
+    if (!btn) return;
+    const r = btn.getBoundingClientRect();
+    const wave = document.createElement('span');
+    wave.className = 'ripple-wave';
+    wave.style.left = (e.clientX - r.left - 2) + 'px';
+    wave.style.top  = (e.clientY - r.top  - 2) + 'px';
+    btn.appendChild(wave);
+    wave.addEventListener('animationend', () => wave.remove());
+  });
+}
+
+/* ─── Hero Canvas Particle System ───────────────────────────────────────── */
+function initHeroParticles() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  // Don't run on low-end / mobile
+  if (window.innerWidth < 768) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'hero-canvas';
+  hero.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const PARTICLE_COUNT = 70;
+  const COLORS = [
+    [230,56,41],   // red
+    [245,179,1],   // gold
+    [255,255,255], // white
+  ];
+
+  let W, H;
+  function resize() {
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+  resize();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 200);
+  }, { passive: true });
+
+  class P {
+    constructor() { this.init(); }
+    init() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.r  = Math.random() * 1.6 + 0.3;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = -(Math.random() * 0.4 + 0.08);
+      this.col= COLORS[Math.floor(Math.random() * COLORS.length)];
+      this.a  = Math.random() * 0.45 + 0.08;
+      this.life = 0;
+      this.max  = Math.random() * 220 + 100;
+    }
+    step() {
+      this.life++;
+      const fade = this.life < 40
+        ? this.a * (this.life / 40)
+        : this.life > this.max - 50
+        ? this.a * ((this.max - this.life) / 50)
+        : this.a;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.col[0]},${this.col[1]},${this.col[2]},${fade.toFixed(3)})`;
+      ctx.fill();
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.life > this.max || this.y < -10) this.init();
+    }
+  }
+
+  const particles = Array.from({ length: PARTICLE_COUNT }, () => new P());
+  // Stagger start positions
+  particles.forEach(p => { p.life = Math.floor(Math.random() * p.max); });
+
+  let raf;
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => p.step());
+    raf = requestAnimationFrame(frame);
+  }
+  frame();
+
+  // Pause when hero is not visible (perf)
+  const visObs = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { if (!raf) frame(); }
+    else { cancelAnimationFrame(raf); raf = null; }
+  }, { threshold: 0 });
+  visObs.observe(hero);
+}
+
+/* ─── Blur-Up Lazy Images ────────────────────────────────────────────────── */
+function initBlurUpImages() {
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if (img.classList.contains('hero-slide')) return; // skip slider images
+    img.classList.add('lazy-blur');
+    const done = () => {
+      // Small delay so the blur has time to apply before removing it
+      requestAnimationFrame(() => img.classList.add('lazy-loaded'));
+    };
+    if (img.complete && img.naturalWidth) {
+      done();
+    } else {
+      img.addEventListener('load', done, { once: true });
+    }
+  });
+}
+
+/* ─── Gallery Card Tilt ──────────────────────────────────────────────────── */
+function initGalleryTilt() {
+  if (window.innerWidth < 768) return;
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('mousemove', (e) => {
+      const r = item.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      item.style.transition = 'transform 0.1s ease, box-shadow 0.1s ease';
+      item.style.transform  =
+        `perspective(700px) rotateY(${x * 9}deg) rotateX(${-y * 7}deg) scale(1.035) translateY(-4px)`;
+    });
+    item.addEventListener('mouseleave', () => {
+      item.style.transition = 'transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease';
+      item.style.transform  = '';
+      setTimeout(() => { item.style.transition = ''; }, 560);
+    });
+  });
+}
+
+/* ─── Eyebrow Slide Reveal ───────────────────────────────────────────────── */
+function initEyebrowReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('eyebrow-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.eyebrow').forEach(el => obs.observe(el));
+}
+
+/* ─── Split Heading Char Animation ──────────────────────────────────────── */
+function initSplitHeadings() {
+  // Only target top-level section titles (not those inside hero or page-hero)
+  const titles = document.querySelectorAll(
+    '.section-header .section-title, .section > .container > .section-title'
+  );
+  titles.forEach(el => {
+    if (el.dataset.split === 'done') return;
+    // Skip if the element contains child HTML tags (to avoid breaking inner spans)
+    if (el.children.length > 0) return;
+    el.dataset.split = 'done';
+    el.classList.add('split-heading');
+    const raw = el.textContent;
+    el.innerHTML = raw.split('').map((c, i) => {
+      if (c === ' ') return '<span class="space-char"> </span>';
+      return `<span class="char" style="transition-delay:${(i * 0.022).toFixed(3)}s">${c}</span>`;
+    }).join('');
+  });
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('chars-in');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.split-heading').forEach(el => obs.observe(el));
+}
+
+/* ─── Section Title Underline Swipe ─────────────────────────────────────── */
+function initUnderlineReveal() {
+  // Add u-line only to titles that were NOT split-char animated
+  // (i.e. those that contain child HTML tags like <br>)
+  document.querySelectorAll('.section-header .section-title').forEach(el => {
+    if (!el.classList.contains('split-heading')) {
+      el.classList.add('u-line');
+    }
+  });
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('ul-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.u-line').forEach(el => obs.observe(el));
+}
+
+/* ─── Service Card Number Badges ─────────────────────────────────────────── */
+function initServiceCardNumbers() {
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    // Only add to cards that have a service-card-img (real service cards)
+    if (!card.querySelector('.service-card-img')) return;
+    if (card.querySelector('.service-num-badge')) return;
+    const badge = document.createElement('div');
+    badge.className = 'service-num-badge';
+    badge.textContent = String(i + 1).padStart(2, '0');
+    badge.style.cssText = `
+      position:absolute;top:14px;right:14px;
+      width:32px;height:32px;
+      background:rgba(10,10,26,0.65);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-family:var(--font);font-size:0.72rem;font-weight:700;
+      color:rgba(255,255,255,0.8);
+      z-index:4;
+      transition:all 0.28s cubic-bezier(0.4,0,0.2,1);
+    `;
+    card.querySelector('.service-card-img').appendChild(badge);
+    card.addEventListener('mouseenter', () => {
+      badge.style.background = 'var(--primary)';
+      badge.style.borderColor = 'var(--primary)';
+      badge.style.color = '#fff';
+    });
+    card.addEventListener('mouseleave', () => {
+      badge.style.background = 'rgba(10,10,26,0.65)';
+      badge.style.borderColor = 'rgba(255,255,255,0.15)';
+      badge.style.color = 'rgba(255,255,255,0.8)';
+    });
+  });
+}
+
+/* ─── Page Transition Overlay ────────────────────────────────────────────── */
+function initPageTransitions() {
+  // Inject overlay element
+  const overlay = document.createElement('div');
+  overlay.className = 'page-trans-overlay';
+  document.body.appendChild(overlay);
+
+  // On internal link click, fade out then navigate
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    // Only handle same-origin, non-anchor, non-external links
+    if (!href || href.startsWith('#') || href.startsWith('http') ||
+        href.startsWith('tel:') || href.startsWith('mailto:') ||
+        href.startsWith('javascript') || link.target === '_blank') return;
+
+    e.preventDefault();
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'all';
+    requestAnimationFrame(() => {
+      overlay.style.transition = 'opacity 0.28s ease';
+      overlay.style.opacity = '1';
+      setTimeout(() => { window.location.href = href; }, 300);
+    });
+  });
+
+  // Fade-in on page load
+  requestAnimationFrame(() => {
+    overlay.style.opacity = '1';
+    overlay.style.transition = 'none';
+    requestAnimationFrame(() => {
+      overlay.style.transition = 'opacity 0.4s ease';
+      overlay.style.opacity = '0';
+      setTimeout(() => { overlay.style.pointerEvents = 'none'; }, 420);
+    });
+  });
+}
